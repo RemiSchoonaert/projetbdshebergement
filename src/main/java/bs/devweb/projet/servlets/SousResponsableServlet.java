@@ -59,7 +59,7 @@ public class SousResponsableServlet extends GenericServlet {
 				List<Etudiant> etudiants = EtudiantService.getInstance().listEtudiantsVerifies();
 				List<Association> associationsDeEtudiant;
 				List<Association> associationsGerees;
-				boolean pasGeree;
+				boolean pasGeree = false;
 
 				// on regarde chaque etudiant verifie
 				for (Etudiant etudiant : etudiants) {
