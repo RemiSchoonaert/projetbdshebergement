@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Accueil</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="./js/alertes.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-sm bg-danger navbar-dark">
+    <a class="navbar-brand" href="connexion">Mat&eacute;riel BDS</a>
+</nav>
+
+<div class="container col-sm-8">
+    <h2>Nouveau mot de passe</h2>
+    <hr>
+    <div id="alerteChangePwdFail" class="alert alert-danger alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Erreur !</strong> L'adresse mail indiqu&eacute;e est erron&eacute;e. Merci de r&eacute;essayer.
+    </div>
+    <form method="post">
+        <div class="form-group">
+            <label for="email">Email :</label>
+            <input type="email" class="form-control" id="email" placeholder="Entrez votre email" name="email">
+        </div>
+        <div class="div-submit">
+            <button type="submit" class="btn btn-danger">Valider</button>
+        </div>
+    </form>
+</div>
+
+</body>
+
+</html>

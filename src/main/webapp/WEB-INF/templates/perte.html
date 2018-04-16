@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Gestion du mat&eacute;riel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="./js/alertes.js"></script>
+</head>
+
+<body>
+
+<!--- Navigation menu --->
+<nav th:replace="~{fragments::menu(perte, ${user})}"></nav>
+
+<div class="container col-sm-10">
+    <h2>D&eacute;clarer une perte</h2>
+    <hr>
+    <div id="alerteDeletionUnauthorized" class="alert alert-warning alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Attention !</strong> Ce mat&eacute;riel est concern&eacute; par une demande d'emprunt ou un emprunt, il ne peut pas &ecirc;tre supprim&eacute;.
+    </div>
+    <div id="alerteDeletionFail" class="alert alert-danger alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Erreur !</strong> Le mat&eacute;riel n'a pas pu &ecirc;tre supprim&eacute;. Merci de r&eacute;essayer.
+    </div>
+    <form method="post">
+        <div class="form-group">
+            <label for="stuff">Mat&eacute;riel perdu :</label>
+            <select class="form-control" id="stuff" name="stuff">
+                <option th:each="materiel : ${listMateriel}" th:value="${materiel.id}"
+                        th:text="${materiel.designation}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantit&eacute; :</label>
+            <input type="number" class="form-control" id="quantity" placeholder="Indiquez la quantit&eacute; perdue"
+                   name="quantity">
+        </div>
+        <div class="div-submit">
+            <button type="submit" class="btn btn-danger">Valider la perte</button>
+        </div>
+    </form>
+</div>
+
+</body>
+
+</html>

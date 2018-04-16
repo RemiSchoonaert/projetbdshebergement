@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Emprunt</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="./js/emprunt.js"></script>
+    <script src="./js/alertes.js"></script>
+</head>
+
+<body>
+
+<!--- Navigation menu --->
+<nav th:replace="~{fragments::menu(emprunt, ${user})}"></nav>
+
+<div class="container col-sm-10">
+    <h2>Effectuer un emprunt</h2>
+    <hr>
+    <div id="alerteErrorPeriod" class="alert alert-warning alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Emprunt impossible !</strong> Le mat&eacute;riel ne sera pas en quantit&eacute; suffisante sur tout le long de la p&eacute;riode souhait&eacute;e. Vous pouvez consulter le calendrier pr&eacute;visionnel des disponibilit&eacute;s afin de vous aider.
+    </div>
+    <div id="alerteErrorQuantity" class="alert alert-warning alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Emprunt impossible !</strong> La quantit&eacute; de mat&eacute;riel souhait&eacute;e est sup&eacute;rieure &agrave; celle disponible.
+    </div>
+    <div id="alerteErrorData" class="alert alert-danger alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Erreur !</strong> La demande d'emprunt n'a pas &eacute;t&eacute; prise en compte. Merci de r&eacute;essayer.
+    </div>
+    <form method="post">
+        <div class="bookadded">
+            <div class="form-group">
+                <label for="stuff">Mat&eacute;riel :</label>
+                <select class="form-control" id="stuff" name="stuff" onblur="updateLink()" onclick="updateLink()">
+                    <option th:each="materiel : ${listMateriel}" th:value="${materiel.id}"
+                            th:text="${materiel.designation}"></option>
+                </select>
+                <a href="#" id="disponibility">Consulter les disponibilit&eacute;s</a>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantit&eacute; :</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" min="1">
+            </div>
+            <div class="form-group">
+                <label for="firstday">Du :</label>
+                <input type="date" class="form-control" id="firstday" name="firstday">
+            </div>
+            <div class="form-group">
+                <label for="lastday">Au :</label>
+                <input type="date" class="form-control" id="lastday" name="lastday">
+            </div>
+        </div>
+        <div class="div-submit">
+            <button type="submit" class="btn btn-danger">Suivant</button>
+        </div>
+    </form>
+</div>
+
+</body>
+
+</html>

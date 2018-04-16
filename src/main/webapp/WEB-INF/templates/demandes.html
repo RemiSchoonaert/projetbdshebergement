@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Emprunt</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="./js/alertes.js"></script>
+</head>
+
+<body>
+
+<!--- Navigation menu --->
+<nav th:replace="~{fragments::menu(demandes, ${user})}"></nav>
+
+<div class="container col-sm-10">
+    <h2>Demandes d'emprunt</h2>
+    <hr>
+    <div id="alerteDeletionFail" class="alert alert-danger alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Erreur !</strong> Le refus de la demande d'emprunt n'a pas &eacute;t&eacute; pris en compte. Merci de r&eacute;essayer.
+    </div>
+    <div id="alerteDeletionSuccess" class="alert alert-success alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        La demande d'emprunt a &eacute;t&eacute; refus&eacute;e avec succ&egrave;s.
+    </div>
+    <div id="alerteValidationFail" class="alert alert-danger alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Erreur !</strong> L'acception de la demande d'emprunt n'a pas &eacute;t&eacute; prise en compte. Merci de r&eacute;essayer.
+    </div>
+    <div id="alerteValidationSuccess" class="alert alert-success alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        La demande d'emprunt a &eacute;t&eacute; accept&eacute;e avec succ&egrave;s.
+    </div>
+    <h4 id="emptytable" th:text="${alerte}"></h4>
+    <table id="tabletodisplay" class="table-striped col-sm table-adapted hide-field">
+        <tr class="centered">
+            <th>Date demande</th>
+            <th>El&egrave;ve</th>
+            <th>Mat&eacute;riel</th>
+            <th>Quantit&eacute;</th>
+            <th>Dur&eacute;e</th>
+            <th colspan="2">D&eacute;cision</th>
+        </tr>
+        <tr th:each="emprunt : ${listEmprunt}">
+            <td th:text="'Le '+${#temporals.format(emprunt.demande, 'dd/MM/YYYY')}"></td>
+            <td th:text="${emprunt.etudiant.nom}+' '+${emprunt.etudiant.prenom}"></td>
+            <td th:text="${emprunt.materiel.designation}"></td>
+            <td th:text="${emprunt.quantite}"></td>
+            <td th:text="'Du '+${#temporals.format(emprunt.debut, 'dd/MM/YYYY')}+' au '+${#temporals.format(emprunt.fin, 'dd/MM/YYYY')}"></td>
+            <td class="choice"><a th:href="'emprunt/validate?id='+${emprunt.id}"><img src="img/validate.jpg"></a></td>
+            <td class="choice"><a th:href="'emprunt/delete?id='+${emprunt.id}"><img src="img/refuse.jpg"></a></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+
+</html>

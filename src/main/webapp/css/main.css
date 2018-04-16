@@ -1,0 +1,99 @@
+.container{
+    margin-top: 15px;
+}
+
+h2{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.div-submit{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+h6{
+    margin-top: 15px;
+    text-align: center;
+}
+
+.form-group, .form-check{
+    margin-bottom: 15px;
+}
+
+.bookadded{
+    margin-bottom: 30px;
+}
+
+h4{
+    text-align: center;
+}
+
+.choice img{
+    width: 35px;
+    margin: 5px;
+    margin-left: 0px;
+}
+
+table.table-adapted th {
+    padding: 0px;
+    padding-right: 100px;
+}
+
+table.table-adapted {
+    margin-bottom: 15px;
+}
+
+@media screen and (max-width: 1160px) {
+    table.table-adapted {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        padding-left: 0px;
+    }
+
+    table.table-adapted > .table-bordered {
+        border: 0;
+    }
+
+}
+
+
+.btn-danger {
+    color: #fff;
+    background-color: #C50828;
+    border-color: #C50828;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #AD0723;
+    border-color: #AD0723;
+}
+
+.bg-danger {
+    background-color: #C50828 !important;
+}
+
+.hide a{
+    padding: 0px !important;
+}
+
+.hide a.dropdown-toggle::after {
+    display: none;
+}
+
+.p-intable{
+    margin: 0px;
+}
+
+.hide-field {
+    display: none !important;
+}
+
+.capitalize{
+    text-transform: uppercase;
+}
+

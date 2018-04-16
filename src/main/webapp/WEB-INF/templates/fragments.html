@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fragments</title>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg bg-danger navbar-dark" th:fragment="menu(currentPage, user)">
+    <a class="navbar-brand" href="inventaire">Mat&eacute;riel BDS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a th:class="${currentPage == 'inventaire' || currentPage == 'disponibilites'} ? 'nav-link active' : 'nav-link'"
+                   href="inventaire">Inventaire</a>
+            </li>
+            <li th:class="${user.statut.nom == 'Visiteur'} ? 'nav-item' : 'hide'">
+                <a th:class="${(currentPage == 'emprunt' || currentPage == 'reglement')} ? 'nav-link active' : 'nav-link'"
+                   th:href="${user.statut.nom == 'Visiteur'} ? 'emprunt' : ''"
+                   th:text="${user.statut.nom == 'Visiteur'} ? 'Effectuer un emprunt' : ''"></a>
+            </li>
+            <li th:class="${user.statut.nom != 'Visiteur'} ? 'nav-item dropdown' : 'hide'">
+                <a th:class="${(currentPage == 'emprunt' || currentPage == 'demandes' || currentPage == 'encours')} ? 'nav-link dropdown-toggle active' : 'nav-link dropdown-toggle'"
+                   th:href="${user.statut.nom != 'Visiteur'} ? '#' : ''"
+                   th:data-toggle="${user.statut.nom != 'Visiteur'} ? 'dropdown' : ''"
+                   th:text="${user.statut.nom != 'Visiteur'} ? 'Emprunt ' : ''"></a>
+                <div th:class="${user.statut.nom != 'Visiteur'} ? 'dropdown-menu' : ''">
+                    <a th:class="${user.statut.nom != 'Visiteur'} ? 'dropdown-item' : ''"
+                       th:href="${user.statut.nom != 'Visiteur'} ? 'emprunt' : ''"
+                       th:text="${user.statut.nom != 'Visiteur'} ? 'Effectuer un emprunt' : ''"></a>
+                    <a th:class="${user.statut.nom != 'Visiteur'} ? 'dropdown-item' : ''"
+                       th:href="${user.statut.nom != 'Visiteur'} ? 'demandes' : ''"
+                       th:text="${user.statut.nom != 'Visiteur'} ? 'Consulter les demandes' : ''"></a>
+                    <a th:class="${user.statut.nom != 'Visiteur'} ? 'dropdown-item' : ''"
+                       th:href="${user.statut.nom != 'Visiteur'} ? 'empruntencours' : ''"
+                       th:text="${user.statut.nom != 'Visiteur'} ? 'Consulter les emprunts en cours' : ''"></a>
+                </div>
+            </li>
+            <li th:class="${user.statut.nom != 'Visiteur'} ? 'nav-item dropdown' : 'hide'">
+                <a th:class="${(currentPage == 'achat' || currentPage == 'perte')} ? 'nav-link dropdown-toggle active' : 'nav-link dropdown-toggle'"
+                   th:href="${user.statut.nom != 'Visiteur'} ? '#' : ''"
+                   th:data-toggle="${user.statut.nom != 'Visiteur'} ? 'dropdown' : ''"
+                   th:text="${user.statut.nom != 'Visiteur'} ? 'Gestion du mat&eacute;riel ' : ''"></a>
+                <div th:class="${user.statut.nom != 'Visiteur'} ? 'dropdown-menu' : ''">
+                    <a th:class="${user.statut.nom != 'Visiteur'} ? 'dropdown-item' : ''"
+                       th:href="${user.statut.nom != 'Visiteur'} ? 'achatnouveaumateriel' : ''"
+                       th:text="${user.statut.nom != 'Visiteur'} ? 'D&eacute;clarer un achat de nouveau mat&eacute;riel' : ''"></a>
+                    <a th:class="${user.statut.nom != 'Visiteur'} ? 'dropdown-item' : ''"
+                       th:href="${user.statut.nom != 'Visiteur'} ? 'achatmaterielexistant' : ''"
+                       th:text="${user.statut.nom != 'Visiteur'} ? 'D&eacute;clarer un achat de mat&eacute;riel existant' : ''"></a>
+                    <a th:class="${user.statut.nom != 'Visiteur'} ? 'dropdown-item' : ''"
+                       th:href="${user.statut.nom != 'Visiteur'} ? 'perte' : ''"
+                       th:text="${user.statut.nom != 'Visiteur'} ? 'D&eacute;clarer une perte de mat&eacute;riel' : ''"></a>
+                </div>
+            </li>
+            <li th:class="${user.statut.nom == 'Responsable'} ? 'nav-item' : 'hide'">
+                <a th:class="${(currentPage == 'sousresponsable')} ? 'nav-link active' : 'nav-link'"
+                   th:href="${user.statut.nom == 'Responsable'} ? 'sousresponsable' : ''"
+                   th:text="${user.statut.nom == 'Responsable'} ? 'D&eacute;signer un sous-responsable' : ''"></a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a th:class="${currentPage == 'compte'} ? 'nav-link dropdown-toggle active' : 'nav-link dropdown-toggle'" href="#" id="navbardrop" data-toggle="dropdown"
+                   th:text="${user.prenom}+' '+${user.nom}+' '" th></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="moncompte">Modifier mon mot de passe</a>
+                    <a class="dropdown-item" href="deconnexion">D&eacute;connexion</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+</body>
+
+</html>

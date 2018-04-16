@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Emprunt</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="./js/alertes.js"></script>
+</head>
+
+<body>
+
+<!--- Navigation menu --->
+<nav th:replace="~{fragments::menu(reglement, ${user})}"></nav>
+
+<div class="container col-sm-10">
+    <h2>R&egrave;glement</h2>
+    <hr>
+    <div id="alerteReglementNotApproved" class="alert alert-warning alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Attention !</strong> Le r&egrave;glement n'a pas &eacute;t&eacute; accept&eacute;.
+    </div>
+    <div id="alerteReglementFail" class="alert alert-danger alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Erreur !</strong> L'acceptation du r&egrave;glement n'a pas &eacute;t&eacute; prise en compte. Merci de r&eacute;essayer.
+    </div>
+    <p>En confirmant ma demande d'emprunt, j'atteste vouloir effectuer un emprunt de mat&eacute;riel d'une valeur &eacute;quivalente &agrave;
+        <strong th:text="${coutEmprunt} + ' &euro;'"></strong> &agrave; l'association <strong
+                th:text="${emprunt.materiel.association.nom}"></strong> du <strong
+                th:text="${#temporals.format(emprunt.debut, 'dd/MM/YYYY')}"></strong> au <strong
+                th:text="${#temporals.format(emprunt.fin, 'dd/MM/YYYY')}"></strong>. Au-del&agrave; de cette date,
+        l'association se r&eacute;serve le droit d'encaisser le ch&egrave;que de caution.</p>
+    <p>En cas de retour de mat&eacute;riel d&eacute;terior&eacute;, l'association se r&eacute;serve le droit de demander un remboursement du
+        mat&eacute;riel.</p>
+    <form method="post">
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="accept">J'accepte le r&egrave;glement du
+                contrat de pr&ecirc;t de mat&eacute;riel.
+            </label>
+        </div>
+        <div class="div-submit">
+            <button type="submit" class="btn btn-danger">Confirmer ma demande</button>
+        </div>
+    </form>
+</div>
+
+</body>
+
+</html>

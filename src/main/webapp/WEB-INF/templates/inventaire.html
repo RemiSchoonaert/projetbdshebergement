@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Inventaire</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="./js/alertes.js"></script>
+</head>
+
+<body>
+
+<!--- Navigation menu --->
+<nav th:replace="~{fragments::menu(inventaire, ${user})}"></nav>
+
+<div class="container col-sm-10">
+    <h2>Liste du mat&eacute;riel</h2>
+    <hr>
+    <div id="alerteDeletionImpossible" class="alert alert-warning alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Attention !</strong> Il n'est pas possible de d&eacute;clarer de perte de mat&eacute;riel car les associations que vous g&eacute;rez n'en poss&egrave;dent aucun.
+    </div>
+    <div id="alerteDeletionSuccess" class="alert alert-success alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Votre mat&eacute;riel a &eacute;t&eacute; correctement supprim&eacute;.
+    </div>
+    <div id="alerteEmpruntSuccess" class="alert alert-success alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Votre demande d'emprunt a bien &eacute;t&eacute; prise en compte. Un message de confirmation vous a &eacute;t&eacute; envoy&eacute;.
+    </div>
+    <div id="alerteEmpruntImpossible" class="alert alert-warning alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Attention !</strong> Il n'y a aucun mat&eacute;riel &agrave; emprunter.
+    </div>
+    <div id="alerteCalendarError" class="alert alert-danger alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Erreur !</strong> Cette adresse ne concerne aucun calendrier pr&eacute;visionnel.
+    </div>
+    <div id="alerteAchatSuccess" class="alert alert-success alert-dismissible hide-field">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Votre achat de mat&eacute;riel a bien &eacute;t&eacute; pris en compte.
+    </div>
+    <h4 id="emptytable" th:text="${alerte}"></h4>
+    <table id="tabletodisplay" class="table-striped col-sm table-adapted hide-field">
+        <tr>
+            <th>D&eacute;signation</th>
+            <th>Disponibilit&eacute;</th>
+            <th>Lieu de stockage</th>
+            <th>Association</th>
+            <th>Personne responsable</th>
+        </tr>
+        <tr th:each="materiel : ${listMateriel}">
+            <td th:text="${materiel.key.designation}"></td>
+            <td><p class="p-intable" th:text="${materiel.value}"></p><a th:href="'disponibilite?materiel='+${materiel.key.id}+'&periode=0'">Consulter le planning</a></td>
+            <td th:text="${materiel.key.lieu.nom}"></td>
+            <td th:text="${materiel.key.association.nom}"></td>
+            <td th:text="${materiel.key.association.etudiant.prenom}+' '+${materiel.key.association.etudiant.nom}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+
+</html>

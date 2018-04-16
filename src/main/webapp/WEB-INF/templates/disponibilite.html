@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Inventaire</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/calendar.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<!--- Navigation menu --->
+<nav th:replace="~{fragments::menu(disponibilites, ${user})}"></nav>
+
+<div class="container col-sm-10">
+    <h2>Planning pr&eacute;visionnel des disponibilit&eacute;s</h2>
+    <hr>
+    <h4 th:text="${materiel.designation}"></h4>
+    <div class="row col-sm navigation">
+        <div class="col-6 navigate-left">
+            <a class="btn btn-danger" th:href="'disponibilite?materiel='+${materiel.id}+'&periode='+${periode - 1}">&laquo;</a>
+        </div>
+        <div class="col-6 navigate-right">
+            <a class="btn btn-danger" th:href="'disponibilite?materiel='+${materiel.id}+'&periode='+${periode + 1}">&raquo;</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm" th:each="mois : ${calendrier}">
+            <table class="table-bordered">
+                <tr>
+                    <th colspan="7" th:each="titreMois : ${mois.key}" th:text="${titreMois.key}"></th>
+                </tr>
+                <tr class="lightbold">
+                    <th>L</th>
+                    <th>M</th>
+                    <th>M</th>
+                    <th>J</th>
+                    <th>V</th>
+                    <th class="weekend">S</th>
+                    <th class="weekend">D</th>
+                </tr>
+                <tr th:each="semaine : ${mois.value}">
+                    <td th:each="jour : ${semaine}" th:class="${jour.value == 0} ? 'unavailable' : ''">
+                        <strong th:each="titreMois : ${mois.key}" th:class="${jour.key.getMonthValue() != titreMois.value} ? 'weekend' : ''" th:text="${jour.key.getDayOfMonth()}"></strong>
+                        <p th:each="titreMois : ${mois.key}" th:class="${jour.key.getMonthValue() != titreMois.value} ? 'weekend' : ''" th:text="'('+${jour.value}+')'"></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
