@@ -15,8 +15,8 @@ public class MailService {
     public static void sendMail(String destinataire, String objet, String contenu) {
         // on indique l'adresse mail et le mot de passe du compte gmail
         // qui sera utilise pour l'envoi de messages
-        final String username = "automail.materielbds@gmail.com";
-        final String password = "MTdkA74m4L07";
+        final String username = "";
+        final String password = "";
 
         // on ajoute les proprietes
         Properties props = new Properties();
