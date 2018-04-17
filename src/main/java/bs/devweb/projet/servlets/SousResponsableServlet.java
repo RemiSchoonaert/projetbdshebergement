@@ -59,10 +59,12 @@ public class SousResponsableServlet extends GenericServlet {
 				List<Etudiant> etudiants = EtudiantService.getInstance().listEtudiantsVerifies();
 				List<Association> associationsDeEtudiant;
 				List<Association> associationsGerees;
-				boolean pasGeree = false;
+				boolean pasGeree;
 
 				// on regarde chaque etudiant verifie
 				for (Etudiant etudiant : etudiants) {
+					// on reset le booleen indiquant le fait que l'etudiant gere ou non l'association
+                    			pasGeree = false;
 					// on liste les associations auxquelles appartient l'etudiant
 					associationsDeEtudiant = LicencierService.getInstance().listAssociationKnowingEtudiant(etudiant);
 					// on liste les associations qu'il gere
